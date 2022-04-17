@@ -63,7 +63,6 @@ export default {
           }
         })
         .then(data => {
-        console.log(data);
         this.id = data.userId;
         localStorage.setItem('userId',this.id);
         localStorage.setItem('userToken',data.token);
@@ -84,7 +83,7 @@ export default {
       margin-left:10px;
     }
     .submit-form {
-    max-width: 300px;
+    max-width: 400px;
     border: black 1px solid;
     padding:10px;
     }

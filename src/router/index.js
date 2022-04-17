@@ -42,7 +42,7 @@ const routes = [
     component: () => import(/* webpackChunkName : "AddArticle"*/"@/components/articles/AddArticle")
   },
   {
-    path: "/account",
+    path: "/account/:id",
     name: "Account",
     component: () => import(/* webpackChunkName : "Account"*/"@/components/users/UserAccount")
   },

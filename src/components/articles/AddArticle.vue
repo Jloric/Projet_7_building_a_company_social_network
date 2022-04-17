@@ -1,5 +1,5 @@
 <template>
-<Header/>
+<HeaderArticles/>
 <div class="articleSeleccted">
     <input v-model="title" placeholder="Titre" type="text" class="title"/>
     <input v-model="content" placeholder="Contenue" type="text" class="content"/>
@@ -7,9 +7,11 @@
     <button @click="AddArticle">Valider</button>
     <h2>{{message}}</h2>
 </template>
+
 <script>
+
 import ArticleServices from "@/services/ArticleServices";
-import Header from "@/components/Header/HeaderArticles";
+import HeaderArticles from "@/components/Header/HeaderArticles";
 export default {
   name: "ArticleSelected",
     data() {
@@ -20,6 +22,9 @@ export default {
         message:""
         };
     },
+    components:{
+        HeaderArticles
+    },
     methods: {
         AddArticle(){
             let data ={
@@ -29,7 +34,8 @@ export default {
             };
             ArticleServices.createPost(data)
             .then(() =>{
-            this.message = "l'article à bien était envoyé"
+            this.message = "l'article à bien était envoyé";
+            this.$router.back()
             })
             .catch(e => {
                 console.log(e);

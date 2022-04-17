@@ -65,9 +65,6 @@ export default {
         message:""
         };
     },
-    mounted(){
-      console.log("ok")
-    },
     methods: {
         userSignup() {
         var data = {
@@ -99,7 +96,6 @@ export default {
     .submit-form {
     max-width: 300px;
     border: black 1px solid;
-    margin: auto;
     }
     .btn{
       margin-top:10px;

@@ -1,5 +1,4 @@
 <template>
-<Header/>
 <div id="articlesList">
     <div class="article" v-for="article in ListOfArticles" :key="article.title">
         <h1 @click="SelectedArticle(article.id)">{{article.title }}</h1>
@@ -8,7 +7,6 @@
 </template>
 
 <script>
-import ArticleServices from "@/services/ArticleServices";
 import ArticleServices from "@/services/ArticleServices";
 export default {
   name: "ArticlesList",
@@ -20,7 +18,6 @@ export default {
     },
     methods:{
         SelectedArticle(articleId){
-            console.log(articleId)
             this.$router.push({ name:"ArticleSelected", params: { id :articleId } });
         }
     },
@@ -30,7 +27,6 @@ export default {
             ArticleServices.getAllPost()
             .then(res =>res.json())
             .then(data => {
-                console.log(data)
                 this.ListOfArticles.push(...data);
                 this.ListOfArticles.reverse();
                 
@@ -45,6 +41,9 @@ export default {
 
 
 <style>
+#articlesList{
+    width:90%;
+}
 .article{
     border:1px black solid;
     margin-bottom:15px;

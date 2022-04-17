@@ -26,9 +26,8 @@ class UserService {
             'content-type': 'application/json',
             'Authorization':`Bearer ${userToken}`
 
-          },
-          body: JSON.stringify(data)
-        }) ;
+          }
+        });
     }
     deleteUser(userId) {
       return fetch(API_URL.concat(userId), {
@@ -37,8 +36,7 @@ class UserService {
             'content-type': 'application/json',
             'Authorization':`Bearer ${userToken}`
 
-          },
-          body: JSON.stringify(data)
+          }
         }) ;
     }
 

@@ -1,28 +1,33 @@
 <template>
-<Header/>
+<HeaderArticles/>
+<div class="thisArticle_main" v-if="articleDeleted ==false">
+    <div class="thisArticle">
+        <div>
+            <h1 class="title">{{title}}</h1>
+        </div>
+        <div>
+            <h2 class="content">{{content}}</h2>
+        </div>
+    </div>
+    <div class="modification">
+        <button class="modify" @click="updateArticle" v-if="modifyArticle">
+            Modifier
+        </button>
+        <button class="delete" @click="deletedArticle" v-if="modifyArticle">
+            Supprimer
+        </button>
+    </div>
+</div>
+<div v-if="articleDeleted">
+    <h2>L'article à bien éte supprimé </h2>
+</div>
 
-<div class="thisArticle">
-    <div>
-        <h1 class="title">{{title}}</h1>
-    </div>
-    <div  >
-        <h2 class="content">{{content}}</h2>
-    </div>
-</div>
-<div>
-    <button class="modify" @click="updateArticle" v-if="modifyArticle">
-        Modifier
-    </button>
-    <button class="delete" @click="deletedArticle" v-if="modifyArticle">
-        Supprimer
-    </button>
-</div>
 
 </template>
 
 <script>
 import ArticleServices from "@/services/ArticleServices";
-
+import HeaderArticles from "@/components/Header/HeaderArticles";
 export default {
   name: "ArticlesList",
   data(){
@@ -30,9 +35,13 @@ export default {
           title:"",
           content:"",
           articleUserId:"",
-          modifyArticle:false
+          modifyArticle:false,
+          articleDeleted:false
       }
   },
+   components:{
+        HeaderArticles
+    },
   mounted() {
       ArticleServices.findOnePost(this.$route.params.id)
         .then(res =>res.json())
@@ -41,9 +50,7 @@ export default {
             this.content = data.content;
             this.articleUserId = data.userId;
             let currentUserId=localStorage.getItem("userId");
-            console.log(currentUserId)
-            console.log(this.articleUserId)
-            if(this.articleUserId == currentUserId){
+            if(this.articleUserId == currentUserId || currentUserId == 1){
                 this.modifyArticle=true
             }
                 
@@ -59,9 +66,10 @@ export default {
         deletedArticle(){
 
             let Confirmation =window.confirm("voulez-vous vraiment supprimer l'article?")
-
-            if(Confirmation.ok){
+            if(Confirmation ==true){
                 ArticleServices.deletePost(this.$route.params.id)
+                this.articleDeleted =true;
+                
             }
         }
     }
@@ -84,6 +92,13 @@ export default {
     height:auto;
 }
 .thisArticle{
-    border-bottom:none;
+    width:80%;
+    display:flex;
+    flex-direction:column;
+    margin-left:10%;
+}
+.modification{
+    display:flex;
+    justify-content: space-around;
 }
 </style>

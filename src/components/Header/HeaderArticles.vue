@@ -10,6 +10,10 @@ import Account from "@/components/Header/AccountNav";
 import HeaderLogo from "@/components/Header/HeaderLogo"
 export default {
     name:'HeaderArticle',
+    components :{
+        Account,
+        HeaderLogo
+    },
     methods:{
         Back(){
             this.$router.back()
@@ -22,7 +26,7 @@ export default {
 <style>
 .header{
     display:flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 </style>

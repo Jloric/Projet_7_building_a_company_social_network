@@ -1,9 +1,7 @@
 <template>
-<router-link to="/" >
-  <button id="retour">Home</button>
-</router-link>
+<HeaderArticles/>
 <div id="articleView" >
-    <ArticlesList v-if="listShown"  />
+    <ArticlesList />
 
     <router-link to="/articles/new-article">
      <button id="createArticle">Créer un article</button>
@@ -16,21 +14,11 @@
 
 <script>
 import ArticlesList from '@/components/articles/ArticlesList'
-
+import HeaderArticles from "@/components/Header/HeaderArticles";
 export default {
-    data(){
-        return{
-            listShown:true,
-            createArticleShown:false,
-            disconnectSeen:true,
-            showArticle:false,
-            id:"",
-            login:""
-            
-        }
-    },
     components:{
         ArticlesList,
+        HeaderArticles
     }
 }
 </script>
@@ -44,7 +32,10 @@ export default {
 }
 #articleView{
     margin-bottom:-50px;
-    margin-top:150px;
+    margin-top:65px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 #disconnect{
     position: absolute;
@@ -52,8 +43,6 @@ export default {
     right:50px;
 }
 #createArticle{
-    position: absolute;
-    bottom:50px;
-    left:50px;
+    margin-bottom:50px;
 }
 </style>

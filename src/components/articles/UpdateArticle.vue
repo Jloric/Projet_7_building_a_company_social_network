@@ -1,5 +1,5 @@
 <template>
-<Header/>
+<HeaderArticles/>
 <div class="articleSeleccted">
     <input v-model="title" placeholder="Titre" type="text" class="title"/>
     <input v-model="content" placeholder="Contenue" type="text" class="content"/>
@@ -9,16 +9,17 @@
 </template>
 <script>
 import ArticleServices from "@/services/ArticleServices";
-import Header from "@/components/Header/HeaderArticles";
+import HeaderArticles from "@/components/Header/HeaderArticles";
 export default {
     name: "ArticleSelected",
     components:{
-      Header
+      HeaderArticles
     },
     data() {
         return {
         title:"",
         content:"",
+        id:this.$route.params.id,
         message:""
         };
     },
@@ -27,11 +28,12 @@ export default {
             let data ={
                 title:this.title,
                 content:this.content,
-                id:this.$route.params.id
+                id:this.id
             };
-            ArticleServices.updatePost(this.$route.params.id, data)
+            ArticleServices.updatePost(this.id, data)
             .then(() =>{
-            this.message = "l'article à bien était envoyé"
+            this.message = "l'article à bien était envoyé",
+            this.$router.push('/articles')
             })
             .catch(e => {
                 console.log(e);
