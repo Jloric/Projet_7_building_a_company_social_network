@@ -23,7 +23,7 @@ export default {
     },
  //on reçupère les articles dès l'ouverture la page   
     mounted() {
-            
+            console.log(localStorage.getItem("userToken"));
             ArticleServices.getAllPost()
             .then(res =>res.json())
             .then(data => {

@@ -1,7 +1,7 @@
-let API_URL='http://localhost:3000/api/post/';
+let API_URL='http://localhost:3000/api/message/';
 let userToken = localStorage.getItem('userToken');
-class ArticleServices { 
-    createPost(data) {
+class MessageServices { 
+    createMessage(data) {
         return fetch(API_URL, {
             method: 'post',
             headers: {
@@ -11,18 +11,17 @@ class ArticleServices {
             body: JSON.stringify(data)
         }) ;
     }
-    getAllPost() {
+    getAllMessages() {
         return fetch(API_URL, {
             method: 'get',
             headers: {
               'content-type': 'application/json',
               'Authorization':`Bearer ${userToken}`
             }
-
           }) ;
     }
-    findOnePost(articleId) {
-        return fetch(API_URL.concat(articleId), {
+    findOneMessage(messageId) {
+        return fetch(API_URL.concat(messageId), {
             method: 'get',
             headers: {
               'content-type': 'application/json',
@@ -31,8 +30,8 @@ class ArticleServices {
             
           }) ;
     }
-    updatePost(articleId,data) {
-        return fetch(API_URL.concat(articleId), {
+    updateMessage(messageId,data) {
+        return fetch(API_URL.concat(messageId), {
             method: 'put',
             headers: {
               'content-type': 'application/json',
@@ -41,7 +40,7 @@ class ArticleServices {
             body: JSON.stringify(data)
           }) ;
     }
-    deletePost(articleId) {
+    deleteMessage(articleId) {
         return fetch(API_URL.concat(articleId), {
             method: 'delete',
             headers: {
@@ -51,4 +50,4 @@ class ArticleServices {
           }) ;
     }
   }
-  export default new ArticleServices();
+  export default new MessageServices();

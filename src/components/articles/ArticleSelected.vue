@@ -1,5 +1,6 @@
 <template>
 <HeaderArticles/>
+<div>
 <div class="thisArticle_main" v-if="articleDeleted ==false">
     <div class="thisArticle">
         <div>
@@ -21,6 +22,8 @@
 <div v-if="articleDeleted">
     <h2>L'article à bien éte supprimé </h2>
 </div>
+<MessageBoard/>
+</div>
 
 
 </template>
@@ -28,6 +31,7 @@
 <script>
 import ArticleServices from "@/services/ArticleServices";
 import HeaderArticles from "@/components/Header/HeaderArticles";
+import MessageBoard from "@/components/messages/MessageBoard";
 export default {
   name: "ArticlesList",
   data(){
@@ -40,7 +44,8 @@ export default {
       }
   },
    components:{
-        HeaderArticles
+        HeaderArticles,
+        MessageBoard
     },
   mounted() {
       ArticleServices.findOnePost(this.$route.params.id)
@@ -50,7 +55,8 @@ export default {
             this.content = data.content;
             this.articleUserId = data.userId;
             let currentUserId=localStorage.getItem("userId");
-            if(this.articleUserId == currentUserId || currentUserId == 1){
+            let currentRole = localStorage.getItem("role")
+            if(this.articleUserId == currentUserId || currentRole == "admin"){
                 this.modifyArticle=true
             }
                 
@@ -67,7 +73,7 @@ export default {
 
             let Confirmation =window.confirm("voulez-vous vraiment supprimer l'article?")
             if(Confirmation ==true){
-                ArticleServices.deletePost(this.$route.params.id)
+                ArticleServices.deleteBoard(this.$route.params.id)
                 this.articleDeleted =true;
                 
             }

@@ -66,6 +66,7 @@ export default {
         this.id = data.userId;
         localStorage.setItem('userId',this.id);
         localStorage.setItem('userToken',data.token);
+        localStorage.setItem('role',data.role)
         this.$router.push('/articles')
         })
         .catch(e => {
