@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require("cors");
 const userRoutes = require('./route/user.route')
 const postRoutes = require('./route/post.route')
+const messageRoutes = require('./route/message.route')
 const db = require("./model");
 var corsOptions = {
   origin: "http://localhost:8080"
@@ -32,5 +33,6 @@ db.sequelize.sync().then(() => {
 
 app.use('/api/user',userRoutes);
 app.use('/api/post',postRoutes);
+app.use('/api/message',messageRoutes);
 
 module.exports = app;

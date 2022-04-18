@@ -7,12 +7,18 @@ const User = db.users;
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
+            if(req.body.role === 'admin'){
+              userRole= "admin"
+            }
+            else{
+              userRole= "standard"
+            }
             const user = {
                 email: req.body.email,
                 password: hash,
                 nom:req.body.nom ,
                 prénom:req.body.prénom ,
-                role:"standard"
+                role:userRole
             };
             User.create(user)
                 .then(() => res.status(201).json({ message: 'Utilisateur crée' }))
@@ -44,7 +50,8 @@ exports.login = (req, res, next) => {
                 { userId: user.id },
                 'RANDOM_TOKEN',
                 { expiresIn: '24h' }
-              )
+              ),
+              role:user.role
             });
           })
           .catch(error => res.status(500).json({ error }));

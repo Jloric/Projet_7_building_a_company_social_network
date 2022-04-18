@@ -109,19 +109,3 @@ exports.deletePost = (req, res) => {
       });
     });
 };
-// Delete all Posts from the database.
-// exports.deleteAll = (req, res) => {
-//   Post.destroy({
-//     where: {},
-//     truncate: false
-//   })
-//     .then(nums => {
-//       res.send({ message: `${nums} Posts were deleted successfully!` });
-//     })
-//     .catch(err => {
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while removing all tutorials."
-//       });
-//     });
-// };
